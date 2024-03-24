@@ -1,72 +1,71 @@
+English| [简体中文](./README_cn.md)
+
 Getting Started with img_msgs
 =======
 
 
 # Intro
 
-img_msgs package用于 h264/h265 开发的消息package，用于传输 h264/h265 帧。
-消息包含：
-1、uint32 index
+The `img_msgs` package is a message package for h264/h265 development, used for transmitting h264/h265 frames.
+The messages include:
+1. uint32 index
 
-帧序列号
+   Frame sequence number
 
-2、uint8[12] encoding
+2. uint8[12] encoding
 
-标识h264/h265
+   Identifier for h264/h265
 
-3、uint32 height
+3. uint32 height
 
-图片高
+   Image height
 
-4、uint32 width
+4. uint32 width
 
-图片宽
+   Image width
 
-5、builtin_interfaces/Time dts
+5. `builtin_interfaces/Time dts`
 
-解码时间戳
+   Decoding timestamp
 
-6、builtin_interfaces/Time pts
+6. `builtin_interfaces/Time pts`
 
-显示时间戳
+   Presentation timestamp
 
-7、uint8[] data
+7. uint8[] data
 
-帧内容，包含nal 头，00 00 00 01/00 00 01 
+   Frame content, including NAL header, 00 00 00 01/00 00 01
 
 # Build
 
 ## Dependency
 
-## 开发环境
+## Development Environment
 
-- 编程语言: C/C++
-- 开发平台: X3/X86
-- 系统版本：Ubuntu 20.0.4
-- 编译工具链:Linux GCC 9.3.0/Linaro GCC 9.3.0
+- Programming Language: C/C++
+- Development Platform: X3/X86
+- System Version: Ubuntu 20.0.4
+- Compilation Toolchain: Linux GCC 9.3.0/Linaro GCC 9.3.0
 
-## 编译
+## Compilation
 
-支持在X3 Ubuntu系统上编译和在PC上使用docker交叉编译两种方式，并支持通过编译选项控制编译pkg的依赖和pkg的功能。
+Supports compilation on X3 Ubuntu system and cross-compilation using Docker on PC, with the ability to control package dependencies and functionalities through compilation options.### Compilation on X3 Ubuntu System
+1. Compilation Environment Verification
 
-### X3 Ubuntu系统上编译
-1、编译环境确认
+- ROS environment variable is set in the current compilation terminal: `source /opt/ros/foxy/setup.bash`.
+- ROS2 compilation tool colcon is installed. If the installed ROS does not include the colcon compilation tool, it needs to be manually installed. Installation command for colcon: `apt update; apt install python3-colcon-common-extensions`.
 
-- 当前编译终端已设置ROS环境变量：`source /opt/ros/foxy/setup.bash`。
-- 已安装ROS2编译工具colcon。安装的ROS不包含编译工具colcon，需要手动安装colcon。colcon安装命令：`apt update; apt install python3-colcon-common-extensions`
-
-2、编译：
+2. Compilation:
 - `colcon build --packages-select img_msgs`
 
-### docker交叉编译
+### Cross-compilation with Docker
+1. Compilation Environment Verification
 
-1、编译环境确认
+- Compilation within docker, and tros is already installed in the docker. For docker installation, cross-compilation explanation, tros compilation, and deployment instructions, please refer to the README.md file in the robot development platform robot_dev_config repository.
 
-- 在docker中编译，并且docker中已经安装好tros。docker安装、交叉编译说明、tros编译和部署说明详见机器人开发平台robot_dev_config repo中的README.md。
+2. Compilation
 
-2、编译
-
-- 编译命令： 
+- Compilation command:
 
   ```
   export TARGET_ARCH=aarch64
@@ -82,14 +81,13 @@ img_msgs package用于 h264/h265 开发的消息package，用于传输 h264/h265
      
   ```
 
-
 # Usage
 
-编译成功后，将生成的install路径拷贝到地平线X3开发板上（如果是在X3上编译，忽略拷贝步骤），并执行如下命令运行
+After successful compilation, copy the generated install path to the Horizon X3 development board (if compiling on X3, ignore the copying step), and execute the following command to run:
 
 ```
 export COLCON_CURRENT_PREFIX=./install
 source ./install/local_setup.sh
-// 头文件路径
+// Header file path
 #include "img_msgs/msg/h26_x_frame.hpp"
 ```

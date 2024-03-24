@@ -1,2 +1,4 @@
+English| [简体中文](./README_cn.md)
+
 # hobot_msgs
-A set of packages which contain horizon defined messages.
+包含定义了地平线的消息的一组软件包。

@@ -1,129 +1,118 @@
+English| [简体中文](./README_cn.md)
+
 # audio_msg
 
-自定义的音频帧audio msg，包括音频帧的序列号、时间戳、音频帧类型、音频帧数据等结果。此数据结构用于地平线语音算法处理音频帧后，发布的智能语音结果。
+Custom audio frame audio msg, including audio frame index, timestamp, audio frame type, audio frame data and other results. This data structure is used for Horizen voice algorithm to process audio frames and publish intelligent voice results.
 
 
 
-message详细说明如下：
+The details of the message are as follows:
 
 ## AudioFrame.msg
 
-音频帧数据的消息定义，消息包含：
+The message definition of audio frame data, including:
 
-1、uint32 index
+1. uint32 index
 
-音频帧序号。
+Audio frame number.
 
-2、builtin_interfaces/Time pts
+2. builtin_interfaces/Time pts
 
-音频帧的时间戳信息。
+Timestamp information of audio frame.
 
-3、AudioFrameType frame_type
+3. AudioFrameType frame_type
 
-音频帧的帧类型信息，包括普通音频帧数据类型、智能音频帧数据类型，详细定义参见AudioFrameType.msg。
+Information of audio frame type, including normal audio frame data type, intelligent audio frame data type. For detailed definitions, please refer to AudioFrameType.msg.
 
-4、SmartAudioData smart_audio
+4. SmartAudioData smart_audio
 
-智能音频帧数据信息
+Information of intelligent audio frame data
 
 
 
 
 ## AudioFrameType.msg
 
-音频帧帧类型信息。帧类型定义为uint8类型，帧类型定义包括以下几种：
+Information about audio frame types. Frame type is defined as uint8 type, which includes the following:
 
-1、FRAME_TYPE_UNKNOW
+1. FRAME_TYPE_UNKNOW
 
-未知的帧类型。
+Unknown frame type.
 
-2、FRAME_TYPE_AUDIO
+2. FRAME_TYPE_AUDIO
 
-普通音频帧数据
+Normal audio frame data.
 
-3、FRAME_TYPE_SMART_AUDIO
+3. FRAME_TYPE_SMART_AUDIO
 
-智能音频帧数据
+Intelligent audio frame data## SmartAudioData.msg
 
+1. SmartAudioFrameType frame_type
 
+Intelligent audio frame data type, including denoised audio data type, audio events, command words, wakeup audio data, and sound source localization Direction of Arrival (Doa) angle information. For detailed definitions, refer to SmartAudioFrameType.msg.
 
+2. AudioEventType event_type
 
-## SmartAudioData.msg
+Audio event type, including normal wakeup event, one-shot wakeup event, ASR detection timeout event, VAD start event, VAD middle event, VAD end event. For detailed definitions, refer to AudioEventType.msg. This field is valid when the frame type is SMART_AUDIO_TYPE_EVENT in SmartAudioFrameType.
 
-1、SmartAudioFrameType frame_type
+3. string cmd_word
 
-智能音频帧数据类型，包括降噪后的音频数据类型、音频事件、命令词、唤醒音频数据、声源定位Doa角度信息，详细定义参见SmartAudioFrameType.msg。
+Command word information of intelligent audio frame, including wakeup word. This field is valid when the frame type is SMART_AUDIO_TYPE_CMD_WORD in SmartAudioFrameType.
 
-2、AudioEventType event_type
+4. uint8[] data
 
-音频事件类型，包括普通唤醒事件、one shot唤醒事件、asr检测超时事件、vad开始事件、vad中间事件、vad结束事件，详细定义参见AudioEventType.msg。当帧类型是SmartAudioFrameType中的SMART_AUDIO_TYPE_EVENT类型时，此字段有效。
+Frame data of intelligent audio frame. This field is valid when the frame type is SMART_AUDIO_TYPE_VOIP (denoised audio frame) or SMART_AUDIO_TYPE_WAKEUP_DATA (wakeup audio frame) in SmartAudioFrameType. The data contains audio content, and for other types, this field is empty.
 
-3、string cmd_word
+5. float32 doa_theta
 
-智能音频帧的命令词信息，包括唤醒词。当帧类型是SmartAudioFrameType中的SMART_AUDIO_TYPE_CMD_WORD类型时，此字段有效。
-
-4、uint8[] data
-
-智能音频帧的帧数据，当帧类型是SmartAudioFrameType中的SMART_AUDIO_TYPE_VOIP（降噪后的音频帧）或者SMART_AUDIO_TYPE_WAKEUP_DATA（唤醒音频帧）类型时，此字段有效，data内容为音频内容，其他类型此字段为空。
-
-5、float32 doa_theta
-
-智能音频帧的doa角度信息。单位为角度，取值范围：0度~180度。当帧类型是SmartAudioFrameType中的SMART_AUDIO_TYPE_DOA类型时，此字段有效。
-
-
-
+Direction of Arrival (Doa) angle information in intelligent audio frame. The unit is in degrees with a value range of 0 to 180 degrees. This field is valid when the frame type is SMART_AUDIO_TYPE_DOA in SmartAudioFrameType.
 
 ## SmartAudioFrameType.msg
 
-智能音频帧的类型信息，包括以下几种帧类型：
+Type information of intelligent audio frame, including the following frame types:
 
-1、SMART_AUDIO_TYPE_VOIP
+1. SMART_AUDIO_TYPE_VOIP
 
-降噪后的音频帧数据类型
+Denoised audio frame data type
 
-2、SMART_AUDIO_TYPE_EVENT
+2. SMART_AUDIO_TYPE_EVENT
 
-音频事件帧类型
+Audio event frame type
 
-3、SMART_AUDIO_TYPE_CMD_WORD
+3. SMART_AUDIO_TYPE_CMD_WORD
 
-命令词音频帧类型
+Command word audio frame type
 
-4、SMART_AUDIO_TYPE_WAKEUP_DATA
+4. SMART_AUDIO_TYPE_WAKEUP_DATA
 
-唤醒词音频帧类型
+Wakeup word audio frame type
 
-5、SMART_AUDIO_TYPE_DOA
+5. SMART_AUDIO_TYPE_DOA
 
-声源定位Doa角度音频帧类型，包括声源的Doa角度信息。支持的Doa角度为0~180度。
+Sound source localization Doa angle audio frame type, including information about the Doa angle of the sound source. Supported Doa angles range from 0 to 180 degrees.## AudioEventType.msg
 
+Audio event type information. The event type is defined as uint8 type, including the following types:
 
+1. EVENT_WKPNORMAL
 
+   Normal wakeup event.
 
-## AudioEventType.msg
+2. EVENT_WKPONESHOT
 
-音频事件类型信息。事件类型定义为uint8类型，包括以下几种：
+   One-shot wakeup event.
 
-1、EVENT_WKPNORMAL
+3. EVENT_WAITASRTIMEOUT
 
-普通唤醒事件。
+   ASR detection timeout event.
 
-2、EVENT_WKPONESHOT
+4. EVENT_VADBEGIN
 
-one shot唤醒事件。
+   VAD start time.
 
-3、EVENT_WAITASRTIMEOUT
+5. EVENT_VADMID
 
-asr检测超时事件。
+   VAD middle event.
 
-4、EVENT_VADBEGIN
+6. EVENT_VADEND
 
-vad开始时间。
-
-5、EVENT_VADMID
-
-vad中事件。
-
-6、EVENT_VADEND
-
-vad结束事件。
+   VAD end event.

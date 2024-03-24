@@ -1,44 +1,45 @@
+English| [简体中文](./README_cn.md)
+
 Getting Started with hbm_img_msgs
 =======
 
 
 # Intro
 
-hbm_img_msgs package用于 share mem 开发的消息package，用于传输1080P RGB24位 以下分辨率的图片数据 定义的消息结构，数据长度最大为1920*1080*3。NV12 也可以进行传输，读取数据的时候，根据 encoding 和 data_size 去读取。
+The hbm_img_msgs package is a message package for shared memory development, used to define message structures for transmitting image data with resolutions below 1080P RGB24-bit, with a maximum data length of 1920*1080*3. NV12 can also be transmitted, and when reading data, it is read based on the encoding and data_size.
 
 # Build
 
 ## Dependency
 
-## 开发环境
+## Development Environment
 
-- 编程语言: C/C++
-- 开发平台: X3/X86
-- 系统版本：Ubuntu 20.0.4
-- 编译工具链:Linux GCC 9.3.0/Linaro GCC 9.3.0
+- Programming Language: C/C++
+- Development Platform: X3/X86
+- System Version: Ubuntu 20.0.4
+- Compilation Toolchain: Linux GCC 9.3.0/Linaro GCC 9.3.0
 
-## 编译
+## Compilation
 
-支持在X3 Ubuntu系统上编译和在PC上使用docker交叉编译两种方式，并支持通过编译选项控制编译pkg的依赖和pkg的功能。
+Supports compilation on X3 Ubuntu system and cross-compilation using docker on PC, and supports controlling the dependencies and functionalities of the compiled pkg through compilation options.
 
-### X3 Ubuntu系统上编译
-1、编译环境确认
+### Compilation on X3 Ubuntu System
+1. Compilation Environment Confirmation
 
-- 当前编译终端已设置ROS环境变量：`source /opt/ros/foxy/setup.bash`。
-- 已安装ROS2编译工具colcon。安装的ROS不包含编译工具colcon，需要手动安装colcon。colcon安装命令：`apt update; apt install python3-colcon-common-extensions`
+- ROS environment variables are set in the current compilation terminal: `source /opt/ros/foxy/setup.bash`.
+- ROS2 compilation tool colcon is installed. If the installed ROS does not include the compilation tool colcon, it needs to be manually installed. colcon installation command: `apt update; apt install python3-colcon-common-extensions`
 
-2、编译：
+2. Compilation:
 - `colcon build --packages-select hbm_img_msgs`
 
-### docker交叉编译
+### Docker Cross-compilation
+1. Compilation Environment Confirmation
 
-1、编译环境确认
+- Compilation in docker with tros already installed. For docker installation, cross-compilation instructions, tros compilation, and deployment instructions, refer to the README.md in the robot development platform robot_dev_config repo.
 
-- 在docker中编译，并且docker中已经安装好tros。docker安装、交叉编译说明、tros编译和部署说明详见机器人开发平台robot_dev_config repo中的README.md。
+2. Compilation
 
-2、编译
-
-- 编译命令： 
+- Compilation command:
 
   ```
   export TARGET_ARCH=aarch64
@@ -48,7 +49,7 @@ hbm_img_msgs package用于 share mem 开发的消息package，用于传输1080P 
   colcon build --packages-select hbm_img_msgs \
      --merge-install \
      --cmake-force-configure \
-     --cmake-args \
+```--cmake-args \
      --no-warn-unused-cli \
      -DCMAKE_TOOLCHAIN_FILE=`pwd`/robot_dev_config/aarch64_toolchainfile.cmake
      
@@ -57,11 +58,11 @@ hbm_img_msgs package用于 share mem 开发的消息package，用于传输1080P 
 
 # Usage
 
-编译成功后，将生成的install路径拷贝到地平线X3开发板上（如果是在X3上编译，忽略拷贝步骤），并执行如下命令运行
+After successful compilation, copy the generated install path to the Horizon X3 development board (ignore the copy step if compiling on X3), and execute the following command to run:
 
 ```
 export COLCON_CURRENT_PREFIX=./install
 source ./install/local_setup.sh
-// 头文件路径
+// Header file path
 #include "hbm_img_msgs/msg/hbm_msg1080_p.hpp"
 ```
