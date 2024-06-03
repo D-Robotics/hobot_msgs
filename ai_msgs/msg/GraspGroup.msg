@@ -1,4 +1,4 @@
-# Copyright (c) 2022，Horizon Robotics.
+# Copyright (c) 2024，Horizon Robotics.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,26 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# 目标消息
+#  抓取组信息
 
-# 目标类型名称，如：人、车、动物、物体
-# person/car/object/animal
-string type
+# 置信度
+float32 score
 
-# 目标跟踪ID号
-uint64 track_id
+# 宽度
+float32 width
 
-# 检测框
-Roi[] rois
+# 高度
+float32 height
 
-# 属性
-Attribute[] attributes
+# 深度
+float32 depth
 
-# 关键点
-Point[] points
+# 旋转矩阵
+float32[] rotation
 
-# 跟踪目标抓拍图、特征、特征的底库检索结果信息
-Capture[] captures
+# 变化矩阵
+float32[] translation
 
-# 抓取目标
-GraspGroup[] graspgroup
+# 目标id
+int32 object_id

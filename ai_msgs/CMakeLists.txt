@@ -50,6 +50,7 @@ set(msg_files
   "msg/Perf.msg"
   "msg/CaptureTargets.msg"
   "msg/PerceptionTargets.msg"
+  "msg/GraspGroup.msg"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
