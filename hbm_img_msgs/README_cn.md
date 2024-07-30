@@ -59,7 +59,7 @@ hbm_img_msgs package用于 share mem 开发的消息package，用于传输1080P 
 
 # Usage
 
-编译成功后，将生成的install路径拷贝到地平线X3开发板上（如果是在X3上编译，忽略拷贝步骤），并执行如下命令运行
+编译成功后，将生成的install路径拷贝到RDK X3开发板上（如果是在X3上编译，忽略拷贝步骤），并执行如下命令运行
 
 ```
 export COLCON_CURRENT_PREFIX=./install

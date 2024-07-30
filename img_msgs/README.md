@@ -83,7 +83,7 @@ Supports compilation on X3 Ubuntu system and cross-compilation using Docker on P
 
 # Usage
 
-After successful compilation, copy the generated install path to the Horizon X3 development board (if compiling on X3, ignore the copying step), and execute the following command to run:
+After successful compilation, copy the generated install path to the RDK X3 development board (if compiling on X3, ignore the copying step), and execute the following command to run:
 
 ```
 export COLCON_CURRENT_PREFIX=./install

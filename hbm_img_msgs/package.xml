@@ -4,7 +4,7 @@
   <name>hbm_img_msgs</name>
   <version>2.0.0</version>
   <description>TogetheROS hbmem image messages</description>
-  <maintainer email="wenli.wu@horizon.ai">wenli</maintainer>
+  <maintainer email="wenli.wu@d-robotics.cc">wenli</maintainer>
   <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
