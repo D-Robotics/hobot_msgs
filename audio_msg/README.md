@@ -91,6 +91,11 @@ Wakeup word audio frame type
 
 Sound source localization Doa angle audio frame type, including information about the Doa angle of the sound source. Supported Doa angles range from 0 to 180 degrees.## AudioEventType.msg
 
+6. SMART_AUDIO_TYPE_ASR_DATA
+
+Denoised and crop with vad audio frame data type
+
+
 Audio event type information. The event type is defined as uint8 type, including the following types:
 
 1. EVENT_WKPNORMAL

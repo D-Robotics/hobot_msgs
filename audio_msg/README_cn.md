@@ -99,7 +99,9 @@ message详细说明如下：
 
 声源定位Doa角度音频帧类型，包括声源的Doa角度信息。支持的Doa角度为0~180度。
 
+6、SMART_AUDIO_TYPE_ASR_DATA
 
+经过降噪以及VAD截取的音频帧数据类型
 
 
 ## AudioEventType.msg
